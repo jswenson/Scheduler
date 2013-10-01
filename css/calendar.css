@@ -1,0 +1,43 @@
+body{
+    font-family: arial;
+    font-size: 12px;
+    margin: 0;
+}
+header h1{
+    font-size:2.5em;
+    margin: 2%;
+}
+#calendar{
+    color: #666;
+}
+.calTbl{
+    border-collapse:collapse;
+    width:100%;
+}
+.calTbl td{
+    border:1px solid #46d;
+}
+.calHeader{
+    background-color: #46d;
+    color: #fff;
+    font-weght: bold;
+    width: 100%;
+}
+.calHeader th.calDay{
+    font-size: 130%;
+    text-align: center;
+    padding: 0.7% 0; 
+}
+#calendar td.dayBox{
+    padding: 0.7% 0;    
+}
+#calendar td.dayBox div.dateLg {
+    float: left;
+    min-width: 1.2em;
+    font-size: 300%;
+    margin-left: 4%;
+    margin-right: 4%;
+    padding-left: 1%;
+}
+
+
