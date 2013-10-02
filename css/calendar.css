@@ -5,7 +5,8 @@ body{
 }
 header h1{
     font-size:2.5em;
-    margin: 2%;
+    margin: 2% 0 0;
+    text-align: center;
 }
 #calendar{
     color: #666;
@@ -20,16 +21,36 @@ header h1{
 .calHeader{
     background-color: #46d;
     color: #fff;
-    font-weght: bold;
     width: 100%;
 }
 .calHeader th.calDay{
     font-size: 130%;
     text-align: center;
-    padding: 0.7% 0; 
+    padding: 0.7% 0.5%; 
+}
+#calendar div#prev, #calendar div#next{
+    background-color: #3959C7;
+    color: #FFFFFF;
+    font-weight: bold;
+    padding: 0.5% 2%;
+    cursor: pointer;
+}
+#calendar div#prev{
+    float: left;
+    border-top-right-radius: 10px;
+}
+#calendar div#next{
+    float:right;
+    border-top-left-radius: 10px;
+}
+#calendar table{
+    clear: both;
 }
 #calendar td.dayBox{
-    padding: 0.7% 0;    
+    padding: 0.7% 0.5%;    
+}
+#calendar td.dayBoxEmpty{
+    background-color: #f5f5f5;
 }
 #calendar td.dayBox div.dateLg {
     float: left;

@@ -10,6 +10,11 @@
         var weekday = date.getDay();
         return weekday;
     }
+    function insertCalendar() {
+        if(calendar){
+            calendar.innerHTML = getDays(days, month, year);
+        }
+    }
     var date = new Date();
     var mday = date.getDay();
     var wday = date.getDate();
@@ -18,10 +23,19 @@
     var days = getTotalDays(year, month);    
 
     function getDays(days, month, year) { //generate calendar body
-        var daysStr = '<tr>';        
+        var daysStr = '<div id="prev">Previous Month</div><div id="next">Next Month</div><table cellpadding="0" cellspacing="0" class="calTbl"><thead>';        
+        daysStr += '<tr class="calHeader">';
+        daysStr += '<th class="calDay">Sunday</th>';
+        daysStr += '<th class="calDay">Monday</th>';
+        daysStr += '<th class="calDay">Tuesday</th>';
+        daysStr += '<th class="calDay">Wednesday</th>';
+        daysStr += '<th class="calDay">Thursday</th>';
+        daysStr += '<th class="calDay">Friday</th>';
+        daysStr += '<th class="calDay">Saturday</th>';
+        daysStr += '</tr></thead><tbody><tr>';        
         var weekday = whichDayOfWeek(year, month, 1); 
         for (var d=1; d<weekday; d++) { // empty cells before
-            daysStr += '<td class="dayBox"></td>'; 
+            daysStr += '<td class="dayBoxEmpty"></td>'; 
         }
         for (var i=1; i<=days; i++) {            
             daysStr += '<td class="dayBox"><div class="dateLg">' + i + '</div>' + getAppts(i, month, year) + '</td>';
@@ -31,14 +45,22 @@
             }
         }
         var endEmptyD = (weekday + days)%7;
-        if (endEmptyD !== 0) {
-            for (var d=0; d<endEmptyD; d++) { // empty cells after
-                daysStr += '<td class="dayBox"></td>'; 
-            }
+        for (var d=0; d<endEmptyD; d++) { // empty cells after
+            daysStr += '<td class="dayBoxEmpty"></td>'; 
         }
-        daysStr += '</tr>';
+        daysStr += '</tr></tbody></table>';
         return daysStr;
     }
-    document.getElementById('calendar').innerHTML = getDays(days, month, year);
-  
+    var calendar = document.getElementById('calendar');
+    insertCalendar();
+    
+    document.getElementById('next').onclick = function(){
+        month = month+1;
+        insertCalendar();   
+    }
+   document.getElementById('prev').onclick = function(){
+        month = month-1;
+        insertCalendar();   
+    }
+    
 })();
