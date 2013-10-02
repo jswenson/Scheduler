@@ -1,9 +1,9 @@
 (function(){
-    function getTotalDays(year, month) { //get total day in month
+    function getTotalDays(year, month) { //get total days in month
         return new Date(year, month, 0).getDate();
-    }    
+    }
     function getAppts(day, month, year) {
-        return "Appointments for " + month + "/" + day + "/" + year;
+        return "Appointments for " + (month+1) + "/" + day + "/" + year;
     }
     function whichDayOfWeek(year, month, day){
         var date = new Date(year, month, day);
@@ -32,6 +32,7 @@
     }
     function insertCalendar() {
         if(calendar){
+            days = getTotalDays(year, month);
             calendar.innerHTML = getDays(days, month, year);
         }
         addClickHandlers();
@@ -41,7 +42,7 @@
     var wday = date.getDate();
     var month = date.getMonth(); 
     var year = date.getFullYear();
-    var days = getTotalDays(year, month);    
+    var days = getTotalDays(year, month);
 
     function getDays(days, month, year) { //generate calendar body
         var daysStr = '<div id="prev">Previous Month</div><div id="next">Next Month</div><table cellpadding="0" cellspacing="0" class="calTbl"><thead>';        
@@ -55,15 +56,15 @@
         daysStr += '<th class="calDay">Saturday</th>';
         daysStr += '</tr></thead><tbody><tr>';        
         var weekday = whichDayOfWeek(year, month, 1); 
-        for (var d=1; d<weekday; d++) { // empty cells before
+        for (var d=0; d<=weekday; d++) { // empty cells before
             daysStr += '<td class="dayBoxEmpty"></td>'; 
         }
-        for (var i=1; i<=days; i++) {            
-            daysStr += '<td class="dayBox"><div class="dateLg">' + i + '</div>' + getAppts(i, month, year) + '</td>';
-            var w = weekday - 1 + i;
+        for (var i=1; i<=days; i++) {
+            var w = weekday + i;
             if (w%7 === 0) {
                 daysStr += '</tr><tr>';
             }
+            daysStr += '<td class="dayBox"><div class="dateLg">' + i + '</div>' + getAppts(i, month, year) + '</td>';
         }
         var endEmptyD = (weekday + days)%7;
         for (var d=0; d<endEmptyD; d++) { // empty cells after
