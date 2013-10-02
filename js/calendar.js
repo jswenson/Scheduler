@@ -31,8 +31,10 @@
             }
         }
         var endEmptyD = (weekday + days)%7;
-        for (var d=0; d<endEmptyD; d++) { // empty cells after
-            daysStr += '<td class="dayBox"></td>'; 
+        if (endEmptyD !== 0) {
+            for (var d=0; d<endEmptyD; d++) { // empty cells after
+                daysStr += '<td class="dayBox"></td>'; 
+            }
         }
         daysStr += '</tr>';
         return daysStr;
