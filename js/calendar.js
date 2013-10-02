@@ -10,10 +10,31 @@
         var weekday = date.getDay();
         return weekday;
     }
+    function addClickHandlers() {
+        next = document.getElementById('next');
+        prev = document.getElementById('prev');
+        next.onclick = function(){
+            month = month+1;
+            insertCalendar();   
+        }           
+        prev.onclick = function(){
+            month = month-1;
+            insertCalendar();   
+        }
+        if (month <12 && month >= 1) {
+            prev.style.display = 'block';
+            next.style.display = 'block';
+        } else if (month >= 12) {            
+            next.style.display = 'none';               
+        } else if (month === 0) {
+            prev.style.display = 'none';                
+        }             
+    }
     function insertCalendar() {
         if(calendar){
             calendar.innerHTML = getDays(days, month, year);
         }
+        addClickHandlers();
     }
     var date = new Date();
     var mday = date.getDay();
@@ -52,15 +73,6 @@
         return daysStr;
     }
     var calendar = document.getElementById('calendar');
-    insertCalendar();
-    
-    document.getElementById('next').onclick = function(){
-        month = month+1;
-        insertCalendar();   
-    }
-   document.getElementById('prev').onclick = function(){
-        month = month-1;
-        insertCalendar();   
-    }
+    insertCalendar();    
     
 })();
