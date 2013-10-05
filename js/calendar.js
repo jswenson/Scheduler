@@ -69,6 +69,9 @@
             }
         }
         var endEmptyD = 35 - (weekday + days);
+        if (endEmptyD == -1) {
+            endEmptyD = 6; // create new row for cases with over 5 calendar lines
+        }
         for (var d=0; d<endEmptyD; d++) { // empty cells after
             daysStr += '<td class="dayBoxEmpty"></td>'; 
         }
