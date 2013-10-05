@@ -1,6 +1,8 @@
 (function(){
     function getTotalDays(year, month) { //get total days in month
-        return new Date(year, month, 0).getDate();
+        month = month + 1; //javascript month start at 0
+        var newDate = new Date(year, month, 0);
+        return newDate.getDate();
     }
     function getAppts(day, month, year) {
         return "Appointments for " + (month+1) + "/" + day + "/" + year;
@@ -21,10 +23,10 @@
             month = month-1;
             insertCalendar();   
         }
-        if (month <12 && month >= 1) {
+        if (month <11 && month >= 1) {
             prev.style.display = 'block';
             next.style.display = 'block';
-        } else if (month >= 12) {            
+        } else if (month >= 11) {            
             next.style.display = 'none';               
         } else if (month === 0) {
             prev.style.display = 'none';                
@@ -55,18 +57,18 @@
         daysStr += '<th class="calDay">Friday</th>';
         daysStr += '<th class="calDay">Saturday</th>';
         daysStr += '</tr></thead><tbody><tr>';        
-        var weekday = whichDayOfWeek(year, month, 1); 
-        for (var d=0; d<=weekday; d++) { // empty cells before
+        var weekday = whichDayOfWeek(year, month, 1);        
+        for (var d=1; d<=weekday; d++) { // empty cells before
             daysStr += '<td class="dayBoxEmpty"></td>'; 
         }
-        for (var i=1; i<=days; i++) {
+        for (var i=1; i<=days; i++) {            
+            daysStr += '<td class="dayBox"><div class="dateLg">' + i + '</div>' + getAppts(i, month, year) + '</td>';
             var w = weekday + i;
             if (w%7 === 0) {
                 daysStr += '</tr><tr>';
             }
-            daysStr += '<td class="dayBox"><div class="dateLg">' + i + '</div>' + getAppts(i, month, year) + '</td>';
         }
-        var endEmptyD = (weekday + days)%7;
+        var endEmptyD = 35 - (weekday + days);
         for (var d=0; d<endEmptyD; d++) { // empty cells after
             daysStr += '<td class="dayBoxEmpty"></td>'; 
         }
