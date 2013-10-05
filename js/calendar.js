@@ -4,6 +4,10 @@
         var newDate = new Date(year, month, 0);
         return newDate.getDate();
     }
+    function nameMonth(index) {        
+        var month = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+        return month[index];
+    }
     function getAppts(day, month, year) {
         return "Appointments for " + (month+1) + "/" + day + "/" + year;
     }
@@ -33,10 +37,11 @@
         }             
     }
     function insertCalendar() {
-        if(calendar){
+        if(calendar && monthTitle){            
             days = getTotalDays(year, month);
             calendar.innerHTML = getDays(days, month, year);
-        }
+            monthTitle.innerHTML = nameMonth(month);
+        }        
         addClickHandlers();
     }
     var date = new Date();
@@ -45,7 +50,7 @@
     var month = date.getMonth(); 
     var year = date.getFullYear();
     var days = getTotalDays(year, month);
-
+    
     function getDays(days, month, year) { //generate calendar body
         var daysStr = '<div id="prev">Previous Month</div><div id="next">Next Month</div><table cellpadding="0" cellspacing="0" class="calTbl"><thead>';        
         daysStr += '<tr class="calHeader">';
@@ -79,6 +84,6 @@
         return daysStr;
     }
     var calendar = document.getElementById('calendar');
-    insertCalendar();    
-    
+    var monthTitle = document.getElementById('calMonth');
+    insertCalendar();        
 })();

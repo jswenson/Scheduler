@@ -2,14 +2,15 @@ body{
     font-family: arial;
     font-size: 12px;
     margin: 0;
+    color: #666;
 }
 header h1{
     font-size:2.5em;
     margin: 2% 0 0;
     text-align: center;
 }
-#calendar{
-    color: #666;
+header span#calMonth{
+    color: #ffaa00;
 }
 .calTbl{
     border-collapse:collapse;
